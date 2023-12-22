@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор імен</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        #container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            padding: 8px;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <input type="text" id="nameInput" placeholder="Введіть імена через кому">
+        <button onclick="generateName()">Згенерувати</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function generateName() {
+            var nameInput = document.getElementById("nameInput");
+            var output = document.getElementById("output");
+
+            if (nameInput.value.trim() === "") {
+                alert("Будь ласка, введіть імена через кому");
+                return;
+            }
+
+            var names = nameInput.value.trim().split(',').map(name => name.trim());
+
+            if (names.length === 0) {
+                alert("Будь ласка, введіть коректні імена");
+                return;
+            }
+
+            var randomIndex = Math.floor(Math.random() * names.length);
+            var randomName = names[randomIndex];
+
+            output.innerHTML = "<p>" + randomName + "</p>";
+
+            // Видалення згенерованого імені зі списку
+            names.splice(randomIndex, 1);
+
+            // Оновлення значення введеного тексту
+            nameInput.value = names.join(', ');
+        }
+    </script>
+</body>
+</html>
